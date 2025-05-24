@@ -1,0 +1,11 @@
+---
+- name: creating dir
+  hosts: servers
+  become: true
+
+  tasks:
+   - name: creating diretory
+     file: 
+      path: /tmp/khaleeda
+      state: directory
+      mode: 0755

@@ -1,0 +1,12 @@
+---
+- name: hello
+  hosts: all
+  become: true
+  
+  tasks:
+   - name: creating a groups
+     group:
+      name: mygrp
+      state: present
+   - name : creating user
+     user: name=khaleeda password=root groups=mygrp shell=/bin/bash

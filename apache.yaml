@@ -1,0 +1,10 @@
+---
+- name: install apche2
+  hosts: servers
+  become: yes
+
+  tasks:
+   - name : apche2 install
+     apt: 
+       name: apache2
+       state: present 

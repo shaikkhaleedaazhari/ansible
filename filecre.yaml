@@ -1,0 +1,10 @@
+---
+- name:
+  hosts: servers
+  become: yes
+
+  tasks:
+   - name: creating file
+     file:
+      path: /tmp/khalee.txt
+      state: touch

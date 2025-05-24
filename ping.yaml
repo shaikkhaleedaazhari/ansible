@@ -1,0 +1,8 @@
+---
+- name: install apche
+  hosts: servers
+  become: yes
+
+  tasks:
+   - name: ping the hosts
+     ansible.builtin.ping:

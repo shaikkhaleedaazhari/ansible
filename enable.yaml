@@ -1,0 +1,10 @@
+---
+- name: enabling apche
+  hosts: servers
+  become: true
+
+  tasks:
+   - name: enableing name
+     service:
+        name: apache2
+        enabled: true

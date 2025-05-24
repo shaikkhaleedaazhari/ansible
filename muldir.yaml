@@ -1,0 +1,12 @@
+---
+- name: hello
+  hosts: servers
+  become: true
+
+  tasks: 
+   - name: file creation
+     file:
+      path: "/home/khal/{{item}}"
+      state: directory
+      mode: 0755
+     loop: [1,2,3]

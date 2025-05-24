@@ -1,0 +1,20 @@
+---
+- name: everything about apache
+  hosts: servers
+  become: true
+
+  tasks:
+   - name: doing
+     apt: 
+        name: apache2
+        state: present
+
+   - name: doing1
+     service:
+        name: apache2
+        enabled: yes
+
+   - name: doing2
+     apt :
+        name: apache2
+        state: absent
