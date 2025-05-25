@@ -1,0 +1,40 @@
+---
+- name: instaling https and apche
+  hosts: all
+  become: true
+
+  vars:
+   apache: apache2
+   http: httpd
+
+  tasks:
+   - name: installing apache2
+     when : ansible_os_family in ["Debian","Ubuntu"]
+     apt:
+      name: "{{ apache }}"
+      state: present
+     notify: enable it
+     tags:
+      - installing
+
+   - name: installing httpd
+     when: ansible_os_family in ["Redhat","RHEL"]  #redhat RHEL
+     yum:
+      name: "{{ http }}"
+      state: present
+     notify: heyhttpd
+     tags:
+      - instlling heyhttpd
+
+  handlers:
+   - name: enable it
+     service:
+      name: "{{apache}}"
+      state: started
+      enabled: true
+
+   - name: heyhttpd
+     service:
+      name: "{{http}}"
+      state: started
+      enabled: true

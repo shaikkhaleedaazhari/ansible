@@ -1,0 +1,26 @@
+- name: crating the user with admin
+  hosts: all
+  become: true
+
+
+  vars:
+   username : khaleeda
+   password_plain: khaleeda@123
+
+  
+  tasks:
+   - name: creating group
+     group : 
+      name: sudo
+      state: present
+
+   
+
+   - name : creating user
+     user: 
+      name: "{{username}}"
+      password: "{{password_plain}}"
+      append : true
+      state: present
+      group: sudo
+      create_home: yes

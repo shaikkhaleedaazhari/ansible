@@ -1,0 +1,31 @@
+---
+- name: installing
+  hosts: all
+  become: true
+
+  tasks:
+   - name: intsalling 
+     apt:
+      update_cache: yes
+     notify: updated
+     tags:
+      -updating
+
+
+   - name: installing
+     apt:
+      name: python3
+      state: present
+
+     notify: installing
+     tags:
+      -installing
+
+  handlers:
+   - name: updated
+     debug:
+      msg: "updated sucessfully"
+  
+   - name: installing
+     debug:
+      msg: "hey installed"

@@ -1,0 +1,13 @@
+---
+- name: hello
+  hosts: all
+  become: true
+
+  tasks:
+  - name: date and time 
+    debug:
+     var=ansible_date_time.date
+
+  - name: time 
+    debug:
+     var: ansible_date_time.time 

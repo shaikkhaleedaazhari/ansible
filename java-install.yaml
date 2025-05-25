@@ -1,0 +1,18 @@
+---
+- name: java-installtio 
+  hosts: all
+  become: true
+
+  tasks:
+   - name: update_pacges
+     apt:
+      update_cache: yes
+
+   - name: java installtion
+     apt:
+      name: "{{packages}}"
+      state: present
+
+     vars:
+      packages:
+       - openjdk-8-jdk

@@ -1,0 +1,33 @@
+---
+- name: instlling apache
+  hosts: all
+  become: true
+
+  tasks: 
+   - name: pache installing
+     apt:
+      update_cache: yes
+     notify: updating cache
+
+     tags: 
+      - update
+
+   - name: apche installing
+     apt: 
+      name: apache2
+      state: present
+
+     notify: restart
+     tags:
+      - install
+
+  handlers:
+   - name:  restart
+     service:
+      name: apache2 
+      state: restarted
+      enabled: yes
+
+   - name: updating cache
+     debug: 
+      msg: "apt updated sucessfully"

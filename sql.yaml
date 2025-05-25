@@ -1,0 +1,37 @@
+---
+- name: sql installation
+  hosts: all
+  become: true
+
+  tasks: 
+   - name: updating the cache
+     apt:
+      update_cache: true
+
+     notify: updating
+     tags:
+      -updating
+
+   - name: installing mysql
+     apt:
+      name: mariadb-server
+      state: present
+       
+
+     notify: installing 
+     tags:
+      - installing
+
+   - name: enabling
+     service:
+      name: mariadb
+      state: started
+      enabled: true
+  handlers:
+   - name:  updating
+     debug:
+      msg: updating done
+
+   - name: installing 
+     debug:
+      msg: installing done

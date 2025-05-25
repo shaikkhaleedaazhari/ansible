@@ -1,0 +1,34 @@
+---
+- name: java installtion
+  hosts: all
+  become: true
+
+  vars:
+   java_version: openjdk-17-jdk
+
+  tasks: 
+   - name: updating repo
+     apt:
+      update_cache: true
+     notify: updating 
+     tags:
+      - update
+  
+   - name: instaling java 
+     apt:
+      name: "{{java_version}}"
+      state: present
+     notify: installing java
+     tags: 
+      - installing
+
+  
+    
+  handlers:
+   - name: updating 
+     debug:
+      msg: "this is upating"
+
+   - name: installing java
+     debug:
+      msg: "installing java"

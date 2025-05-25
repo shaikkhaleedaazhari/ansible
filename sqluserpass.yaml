@@ -1,0 +1,37 @@
+---
+- name: Install MySQL and create user
+  hosts: all
+  become: true
+
+  vars:
+    db_username: khaleeda
+    db_password: abc@123
+
+  tasks:
+    - name: Update APT cache
+      apt:
+        update_cache: true
+
+    - name: Install MySQL Server
+      apt:
+        name: mysql-server
+        state: present
+
+    - name: Ensure MySQL service is started and enabled
+      service:
+        name: mysql
+        state: started
+        enabled: true
+
+    - name: Install Python MySQL library (required for mysql_user)
+      apt:
+        name: python3-pymysql
+        state: present
+
+    - name: Create MySQL user with privileges
+      mysql_user:
+        name: "{{ db_username }}"
+        password: "{{ db_password }}"
+        host: "%"
+        priv: "*.*:ALL,GRANT"
+        state: present
